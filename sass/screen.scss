@@ -1,0 +1,109 @@
+
+// required imports
+@import "compass/reset/utilities";
+@import "compass/css3/font-face";
+@import "compass/css3/columns";
+@import "compass/layout/sticky-footer";
+@import "compass/typography/lists/inline-block-list";
+@import "compass/typography/links/link-colors";
+@import "compass/typography/text/replacement";
+@import "compass/typography/vertical_rhythm";
+@import "compass/utilities/color/contrast";
+@import "compass/css3/images";
+
+body, p, h2, h3, section, nav, ul, li, a {
+	@include reset-box-model;
+	@include reset-font;
+}
+
+@include font-face('Alegrya', font-files('AlegreyaSans-Medium.ttf'));
+
+@include sticky-footer(150px);
+
+ //$base-font-size: 16px;
+ //$base-line-height: 24px;
+ @include establish-baseline;  
+
+body {
+	font-family: 'Alegrya', sans-serif;
+	background: #ededed;
+	//@include debug-vertical-alignment;
+}
+
+#{headings(2,3)} {
+	text-align: center;
+	font-weight: 500;
+}
+
+h2 {
+	font-size: 2.5em;
+	padding-top: 60px;
+}
+
+
+section {
+	@include column-count(4);
+	@include column-gap(1.5em);
+
+	@media screen and (max-width: 640px) {
+		@include column-count(1);	
+	}
+}
+
+nav {
+	@include clearfix;
+
+	h3 {
+		@include float-left;	
+		@include replace-text-with-dimensions('logo.gif', $inline: inline);
+	}
+
+	ul {
+		@include float-right;
+
+		li {
+			@include inline-block-list-item(20px);
+		}
+
+		a {
+			text-decoration: none;
+			padding: 20px;
+			display: inline-block;
+
+			@include link-colors(black, tomato, lightblue, gray, green);
+		}
+	}
+
+	@media screen and (max-width: 640px) {
+		display: none;	
+	}
+}
+
+p {
+	text-align: justify;
+
+	@media screen and (max-width: 640px) {
+		@include trailer;
+		@include leader;	
+	}
+}
+
+header {
+	height: 150px;
+	background-image: image-url('name.gif');
+	background-repeat: no-repeat;
+	background-position: center left;
+
+	@media screen and (max-width: 640px) {
+		background-image: none;	
+	}
+}
+
+header,
+footer {
+	@include contrasted(#33332D, shade(#FFD34E, 10%), shade(#BD4932, 10%));
+	//@include contrasted(#33332D);
+	//@include contrasted(#ccc);
+	//@include background (linear-gradient(#7E8AA2, adjust-lightness(#7E8AA2, 50%), adjust-lightness(#7E8AA2, -10%)));
+}
+
